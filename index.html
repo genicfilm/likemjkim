@@ -193,7 +193,7 @@ footer p { margin: 0; font-size: 12px; line-height: 1.6; color: var(--grey); max
 .js .name .kname, .js .desc { animation: fade .9s ease .45s both; }
 .js .strip { animation: fade .9s ease .6s both; }
 
-@media (prefers-reduced-motion: no-preference) {
+@media (min-width: 1000px) and (prefers-reduced-motion: no-preference) {
   .rail-sec.pinned { padding-block: 0; padding-left: 0; padding-right: 0; }
   .rail-sec.pinned .rail-pin { position: sticky; top: calc(env(safe-area-inset-top, 0px) + var(--bar)); height: calc(100svh - var(--bar)); display: flex; flex-direction: column; justify-content: center; overflow: hidden;
     padding-left: max(var(--g), env(safe-area-inset-left, 0px)); padding-right: max(var(--g), env(safe-area-inset-right, 0px)); }
@@ -216,13 +216,11 @@ footer p { margin: 0; font-size: 12px; line-height: 1.6; color: var(--grey); max
   .reach-top p { margin-top: 18px; }
   .figs { grid-template-columns: 1fr; row-gap: 28px; }
   .pairs { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 22px; }
-  .brand-row { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .brand-row { display: flex; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; }
   .brand-row::-webkit-scrollbar { display: none; }
-  .brand-row .reel-tile { width: 40vw; flex: none; scroll-snap-align: start; }
-  #work { overflow-x: clip; }
-  .brand-row.drift { overflow: visible; scroll-snap-type: none; width: max-content; will-change: transform; }
-  .rail-sec.pinned .rail .frame img { height: min(52svh, 480px); }
-  .rail-sec.pinned .rail-wrap { margin-top: 4vh; }
+  .brand-row .reel-tile { width: 40vw; flex: none; }
+  .rail-wrap { scroll-snap-type: none; overscroll-behavior-x: contain; }
+  .rail .reel-tile { scroll-snap-align: none; }
   .logos { gap: 16px 30px; }
   .rail-head { flex-direction: column; align-items: start; }
   .book-grid { grid-template-columns: 1fr; }
@@ -471,24 +469,19 @@ footer p { margin: 0; font-size: 12px; line-height: 1.6; color: var(--grey); max
   const wrapEl = sec.querySelector('.rail-wrap');
   const bar = sec.querySelector('.progress i');
   const brandRow = document.querySelector('.brand-row');
-  let travel = 0, railX = 0, railT = 0, brandX = 0, brandT = 0, glide = 0;
-  /* phones keep their native touch scroll; the sideways rows ease toward their target so they glide like desktop */
-  const ease = matchMedia('(pointer: coarse)').matches ? 0.14 : 0.3;
+  let travel = 0, railX = 0, railT = 0, glide = 0;
   function step() {
     glide = 0;
-    railX += (railT - railX) * ease; brandX += (brandT - brandX) * ease;
+    railX += (railT - railX) * 0.3;
     if (Math.abs(railT - railX) < 0.3) railX = railT;
-    if (Math.abs(brandT - brandX) < 0.3) brandX = brandT;
     if (sec.classList.contains('pinned')) rail.style.transform = 'translate3d(' + railX.toFixed(1) + 'px,0,0)';
-    if (brandRow.classList.contains('drift')) brandRow.style.transform = 'translate3d(' + brandX.toFixed(1) + 'px,0,0)';
-    if (railX !== railT || brandX !== brandT) glide = requestAnimationFrame(step);
+    if (railX !== railT) glide = requestAnimationFrame(step);
   }
   const kick = () => { if (!glide) glide = requestAnimationFrame(step); };
   function sizeRail() {
-    const on = !reduce;
+    const on = desk.matches && !reduce;
     sec.classList.toggle('pinned', on);
-    brandRow.classList.toggle('drift', !reduce && !desk.matches);
-    brandRow.style.transform = ''; railX = railT = brandX = brandT = 0;
+    railX = railT = 0;
     sec.style.height = ''; rail.style.transform = '';
     if (!on) { travel = 0; return; }
     travel = Math.max(0, rail.scrollWidth - wrapEl.clientWidth);
@@ -521,15 +514,37 @@ footer p { margin: 0; font-size: 12px; line-height: 1.6; color: var(--grey); max
       railT = -p * travel; kick();
       bar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
     }
-    if (brandRow.classList.contains('drift')) {
-      const r = brandRow.getBoundingClientRect();
-      const run = Math.max(0, brandRow.scrollWidth - brandRow.parentElement.clientWidth + parseFloat(getComputedStyle(brandRow.parentElement).paddingLeft) * 2);
-      const p = Math.min(1, Math.max(0, (vh * 0.75 - r.top) / (vh * 0.75 + r.height * 0.6)));
-      brandT = -p * run; kick();
-    }
   }
   const req = () => { if (!raf) raf = requestAnimationFrame(tick); };
   addEventListener('scroll', req, { passive: true });
+
+  /* phones: each reel row drifts slowly on its own and is swiped natively; a touch pauses it,
+     it picks up again a few seconds after the finger and the momentum stop. Page scroll is never touched. */
+  function drift(el) {
+    let pos = el.scrollLeft, set = pos, dir = 1, hold = 0, seen = false, last = 0;
+    const speed = 16;
+    const rest = () => { hold = performance.now() + 2800; };
+    el.addEventListener('touchstart', () => { hold = Infinity; }, { passive: true });
+    el.addEventListener('touchend', rest, { passive: true });
+    el.addEventListener('touchcancel', rest, { passive: true });
+    el.addEventListener('scroll', () => {
+      if (Math.abs(el.scrollLeft - set) > 2) { pos = set = el.scrollLeft; if (hold !== Infinity) rest(); }
+    }, { passive: true });
+    new IntersectionObserver((es) => { seen = es[0].isIntersecting; }, { threshold: 0.25 }).observe(el);
+    const loop = (t) => {
+      const dt = last ? Math.min(0.05, (t - last) / 1000) : 0; last = t;
+      const max = el.scrollWidth - el.clientWidth;
+      if (seen && t > hold && max > 0 && !desk.matches) {
+        pos += dir * speed * dt;
+        if (pos >= max) { pos = max; dir = -1; } else if (pos <= 0) { pos = 0; dir = 1; }
+        const next = Math.round(pos);
+        if (next !== set) { set = next; el.scrollLeft = next; }
+      }
+      requestAnimationFrame(loop);
+    };
+    requestAnimationFrame(loop);
+  }
+  if (!reduce) { drift(brandRow); drift(wrapEl); }
 
   /* smooth, weighted scroll on wheel and trackpad; touch keeps the phone's own scroll */
   /* Nothing's scroll (the approved GENIC feel): 1.1 s exponential ease-out on the wheel, touch native */
