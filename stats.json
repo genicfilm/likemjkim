@@ -1,0 +1,159 @@
+{
+ "as_of": "2026-10-31",
+ "window": {
+  "start": "2026-08-03",
+  "end": "2026-10-31",
+  "days": 90
+ },
+ "followers": {
+  "tiktok": 16900,
+  "youtube": 30500,
+  "instagram": 5340,
+  "total": 52740
+ },
+ "tiktok": {
+  "n": 47,
+  "views": 2152060,
+  "median": 5616,
+  "er_median": 6.43,
+  "over_50k": 9,
+  "paid_n": 8,
+  "paid_median": 5959.5,
+  "organic_n": 39,
+  "organic_median": 5587,
+  "lift_pct": 6.667263289779846,
+  "paid_save_rate": 1.791,
+  "organic_save_rate": 0.912,
+  "save_ratio": 1.962,
+  "paid_ids": [
+   "7687236497573055775",
+   "7688911132819492126",
+   "7690425915339230495",
+   "7693007095871900958",
+   "7694258473701313822",
+   "7697993481683258655",
+   "7700807598869581087",
+   "7700989188619095326"
+  ]
+ },
+ "youtube": {
+  "subs": 30500,
+  "shorts_counted": 48,
+  "median": 4900.0
+ },
+ "instagram": {
+  "followers": 5340,
+  "reels_counted": 24,
+  "median": 5761.0
+ },
+ "typical": 16277.0,
+ "cards": {
+  "tt:7697993481683258655:views": 243200,
+  "tt:7690425915339230495:saves": 958,
+  "tt:7700989188619095326:views": 48300,
+  "ig:DdWrM6AJA7b:views": 1297307,
+  "tt:7699474972376435999:views": 407000,
+  "tt:7680553747189091614:saves": 7666,
+  "tt:7680177353418427679:views": 251000,
+  "ig:DcT0TVyylpx:views": 238181,
+  "tt:7679222940566703374:views": 193500,
+  "tt:7680069002927901966:views": 62000,
+  "tt:7686068822884797727:views": 57100
+ },
+ "review": {
+  "organic_with_mentions": [
+   {
+    "id": "7687420789435419934",
+    "mentions": [
+     "serina"
+    ]
+   },
+   {
+    "id": "7685797269953580318",
+    "mentions": [
+     "kisome"
+    ]
+   },
+   {
+    "id": "7678315105150307614",
+    "mentions": [
+     "serina"
+    ]
+   }
+  ]
+ },
+ "values": {
+  "kit_month": "Oct 2026",
+  "kit_month.ko": "2026년 10월",
+  "followers_total": "52.7K",
+  "followers_total.ko": "5.27만",
+  "views90": "2.1M",
+  "views90.ko": "210만",
+  "er": "6.4%",
+  "typical": "16.2K",
+  "typical.ko": "1.62만",
+  "over50k": "9",
+  "yt_subs": "30.5K",
+  "yt_subs.ko": "3.05만",
+  "tt_followers": "16.9K",
+  "tt_followers.ko": "1.69만",
+  "ig_followers": "5.3K",
+  "ig_followers.ko": "5,300",
+  "asof": "Oct 31 2026",
+  "asof.ko": "2026년 10월 31일",
+  "win": "Aug 3 – Oct 31",
+  "win.ko": "8월 3일–10월 31일",
+  "tt_n": "47",
+  "brand_x": "1.9",
+  "paid_sr": "1.7%",
+  "org_sr": "0.9%",
+  "brand_win": "same 90 days",
+  "brand_win.ko": "같은 90일",
+  "tt:7697993481683258655:views": "243K views",
+  "tt:7697993481683258655:views.ko": "조회수 24.3만",
+  "tt:7690425915339230495:saves": "958 saves",
+  "tt:7690425915339230495:saves.ko": "저장 958회",
+  "tt:7700989188619095326:views": "48.3K views",
+  "tt:7700989188619095326:views.ko": "조회수 4.83만",
+  "ig:DdWrM6AJA7b:views": "1.2M views",
+  "ig:DdWrM6AJA7b:views.ko": "조회수 120만",
+  "tt:7699474972376435999:views": "407K views",
+  "tt:7699474972376435999:views.ko": "조회수 40.7만",
+  "tt:7680553747189091614:saves": "7.6K saves",
+  "tt:7680553747189091614:saves.ko": "저장 7,600회",
+  "tt:7680177353418427679:views": "251K views",
+  "tt:7680177353418427679:views.ko": "조회수 25.1만",
+  "ig:DcT0TVyylpx:views": "238K views",
+  "ig:DcT0TVyylpx:views.ko": "조회수 23.8만",
+  "tt:7679222940566703374:views": "193K views",
+  "tt:7679222940566703374:views.ko": "조회수 19.3만",
+  "tt:7680069002927901966:views": "62K views",
+  "tt:7680069002927901966:views.ko": "조회수 6.2만",
+  "tt:7686068822884797727:views": "57.1K views",
+  "tt:7686068822884797727:views.ko": "조회수 5.71만",
+  "desc": "MJ Kim (@likemjkim) is a Korea-based K-beauty & lifestyle creator making English videos on TikTok, YouTube & Instagram. 2.1M TikTok views in 90 days.",
+  "og_desc": "Korea-based K-beauty & lifestyle creator. English-language videos on TikTok, YouTube & Instagram. Media kit, Oct 2026."
+ },
+ "held": [],
+ "audience": {
+  "note": "hand-entered from MJ's native analytics (not public); the daily job never changes these",
+  "as_of": "2026-10",
+  "instagram": {
+   "women_pct": 90,
+   "age_18_34_pct": 61,
+   "top_country": "US 16.7%"
+  },
+  "tiktok": {
+   "age_18_34_pct": 77.2,
+   "top_countries": "Mexico 13%, US 11.6%",
+   "women_pct": 42
+  },
+  "youtube": {
+   "women_pct": 77.3,
+   "age_18_34_pct": 49.4,
+   "top_country": "India 46.2%"
+  }
+ },
+ "fetched_at": "2026-10-31T09:15:02-07:00",
+ "source": "public counts: TikTok profile page + yt-dlp listing; YouTube /shorts via yt-dlp; Instagram Graph API business_discovery (public data)"
+}
