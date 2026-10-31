@@ -193,7 +193,7 @@ footer p { margin: 0; font-size: 12px; line-height: 1.6; color: var(--grey); max
 .js .name .kname, .js .desc { animation: fade .9s ease .45s both; }
 .js .strip { animation: fade .9s ease .6s both; }
 
-@media (min-width: 1000px) and (prefers-reduced-motion: no-preference) {
+@media (prefers-reduced-motion: no-preference) {
   .rail-sec.pinned { padding-block: 0; padding-left: 0; padding-right: 0; }
   .rail-sec.pinned .rail-pin { position: sticky; top: calc(env(safe-area-inset-top, 0px) + var(--bar)); height: calc(100svh - var(--bar)); display: flex; flex-direction: column; justify-content: center; overflow: hidden;
     padding-left: max(var(--g), env(safe-area-inset-left, 0px)); padding-right: max(var(--g), env(safe-area-inset-right, 0px)); }
@@ -219,6 +219,10 @@ footer p { margin: 0; font-size: 12px; line-height: 1.6; color: var(--grey); max
   .brand-row { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
   .brand-row::-webkit-scrollbar { display: none; }
   .brand-row .reel-tile { width: 40vw; flex: none; scroll-snap-align: start; }
+  #work { overflow-x: clip; }
+  .brand-row.drift { overflow: visible; scroll-snap-type: none; width: max-content; will-change: transform; }
+  .rail-sec.pinned .rail .frame img { height: min(52svh, 480px); }
+  .rail-sec.pinned .rail-wrap { margin-top: 4vh; }
   .logos { gap: 16px 30px; }
   .rail-head { flex-direction: column; align-items: start; }
   .book-grid { grid-template-columns: 1fr; }
@@ -466,10 +470,25 @@ footer p { margin: 0; font-size: 12px; line-height: 1.6; color: var(--grey); max
   const rail = sec.querySelector('.rail');
   const wrapEl = sec.querySelector('.rail-wrap');
   const bar = sec.querySelector('.progress i');
-  let travel = 0;
+  const brandRow = document.querySelector('.brand-row');
+  let travel = 0, railX = 0, railT = 0, brandX = 0, brandT = 0, glide = 0;
+  /* phones keep their native touch scroll; the sideways rows ease toward their target so they glide like desktop */
+  const ease = matchMedia('(pointer: coarse)').matches ? 0.14 : 0.3;
+  function step() {
+    glide = 0;
+    railX += (railT - railX) * ease; brandX += (brandT - brandX) * ease;
+    if (Math.abs(railT - railX) < 0.3) railX = railT;
+    if (Math.abs(brandT - brandX) < 0.3) brandX = brandT;
+    if (sec.classList.contains('pinned')) rail.style.transform = 'translate3d(' + railX.toFixed(1) + 'px,0,0)';
+    if (brandRow.classList.contains('drift')) brandRow.style.transform = 'translate3d(' + brandX.toFixed(1) + 'px,0,0)';
+    if (railX !== railT || brandX !== brandT) glide = requestAnimationFrame(step);
+  }
+  const kick = () => { if (!glide) glide = requestAnimationFrame(step); };
   function sizeRail() {
-    const on = desk.matches && !reduce;
+    const on = !reduce;
     sec.classList.toggle('pinned', on);
+    brandRow.classList.toggle('drift', !reduce && !desk.matches);
+    brandRow.style.transform = ''; railX = railT = brandX = brandT = 0;
     sec.style.height = ''; rail.style.transform = '';
     if (!on) { travel = 0; return; }
     travel = Math.max(0, rail.scrollWidth - wrapEl.clientWidth);
@@ -499,8 +518,14 @@ footer p { margin: 0; font-size: 12px; line-height: 1.6; color: var(--grey); max
       const r = sec.getBoundingClientRect();
       const span = sec.offsetHeight - pin.offsetHeight;
       const p = Math.min(1, Math.max(0, -r.top / (span || 1)));
-      rail.style.transform = 'translate3d(' + (-p * travel).toFixed(1) + 'px,0,0)';
+      railT = -p * travel; kick();
       bar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
+    }
+    if (brandRow.classList.contains('drift')) {
+      const r = brandRow.getBoundingClientRect();
+      const run = Math.max(0, brandRow.scrollWidth - brandRow.parentElement.clientWidth + parseFloat(getComputedStyle(brandRow.parentElement).paddingLeft) * 2);
+      const p = Math.min(1, Math.max(0, (vh * 0.75 - r.top) / (vh * 0.75 + r.height * 0.6)));
+      brandT = -p * run; kick();
     }
   }
   const req = () => { if (!raf) raf = requestAnimationFrame(tick); };
