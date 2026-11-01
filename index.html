@@ -241,7 +241,39 @@ html.lenis, html.lenis body { height: auto; }
 .formats .row:first-child { border-top: 1px solid var(--ink); }
 .formats .serif { font-size: clamp(24px, 2vw, 34px); line-height: 1.05; }
 .formats p { margin: 0; font-size: 16px; }
-.contact { margin-top: 13vh; border-top: 1px solid var(--ink); padding-top: 22px; }
+/* inquiry form */
+.inq { display: grid; gap: 26px; min-width: 0; }
+.f2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 26px 24px; }
+.fld { display: grid; gap: 8px; min-width: 0; border: 0; margin: 0; padding: 0; }
+.fld input:not([type=radio]):not([type=checkbox]), .fld select, .fld textarea { width: 100%; font: inherit; font-size: 17px; color: var(--ink); background: transparent;
+  border: 0; border-bottom: 1px solid var(--mute); border-radius: 0; padding: 8px 0 10px; outline: none; transition: border-color .25s; -webkit-appearance: none; appearance: none; }
+.fld select { background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%);
+  background-position: calc(100% - 10px) 55%, calc(100% - 5px) 55%; background-size: 5px 5px; background-repeat: no-repeat; padding-right: 24px; }
+.fld textarea { resize: vertical; min-height: 104px; line-height: 1.5; }
+.fld input:focus, .fld select:focus, .fld textarea:focus { border-bottom-color: var(--ink); }
+.fld ::placeholder { color: var(--mute); }
+.fld legend { padding: 0; margin-bottom: 8px; }
+.chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+.chip { position: relative; }
+.chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.chip > span { display: inline-block; font-size: 14px; padding: 10px 16px; border: 1px solid var(--mute); transition: background .2s, color .2s, border-color .2s; }
+.chip input:checked + span { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.chip input:focus-visible + span { outline: 1.5px solid var(--ink); outline-offset: 3px; }
+.inq.tried .fld:has(:invalid) .lab, .inq.tried fieldset:has(:invalid) legend { color: #B3261E; }
+.inq.tried .fld :invalid { border-bottom-color: #B3261E; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.inq-foot { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-top: 6px; }
+.inq-foot .btn[disabled] { opacity: .45; cursor: default; }
+.inq-err { display: none; margin: 0; font-size: 14px; color: #B3261E; }
+.inq.tried.bad .inq-err { display: block; }
+.inq-done { display: none; border-top: 1px solid var(--ink); padding-top: 22px; outline: none; }
+.inq-done .serif { font-size: clamp(32px, 3vw, 48px); line-height: 1.05; margin: 0 0 12px; }
+.inq-done p:last-child { margin: 0; }
+.inq.sent > :not(.inq-done) { display: none; }
+.inq.sent .inq-done { display: block; }
+.mailalt { font-size: 15px; }
+.mailalt #email { color: var(--ink); border-bottom: 1px solid var(--hair); }
+.contact { margin-top: 10vh; border-top: 1px solid var(--ink); padding-top: 22px; }
 .email { display: block; font-family: var(--serif); font-size: clamp(38px, 7.6vw, 136px); line-height: 1; letter-spacing: -.02em; margin-top: 20px; user-select: all; -webkit-user-select: all; overflow-wrap: anywhere; }
 .contact-actions { display: flex; flex-wrap: wrap; gap: 14px 26px; align-items: center; margin-top: 28px; }
 .btn { font-size: 12px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; padding: 14px 20px; border: 1px solid var(--ink); }
@@ -302,6 +334,8 @@ footer p { margin: 0; font-size: 12px; line-height: 1.6; color: var(--grey); max
   .logos { gap: 16px 30px; }
   .rail-head { flex-direction: column; align-items: start; }
   .book-grid { grid-template-columns: 1fr; }
+  .inq { margin-top: 6vh; }
+  .f2 { grid-template-columns: 1fr; }
   .formats { margin-top: 7vh; }
   .socials { margin-left: 0; }
 }
@@ -449,19 +483,57 @@ footer p { margin: 0; font-size: 12px; line-height: 1.6; color: var(--grey); max
     </div>
   </section>
 
-  <!-- 06 booking -->
+  <!-- 06 work with MJ: inquiry form. No address is ever asked for or shown here;
+       shipping details go out by email only after MJ accepts (Apps Script in MJ/collab-intake). -->
   <section class="sec wrap" id="book">
     <div class="book-grid">
       <div>
-        <div class="lab g"><span class="en">Booking</span><span class="ko" lang="ko">문의</span></div>
-        <h2 class="rv"><span class="en">Collaborations &amp; press</span><span class="ko" lang="ko">협업 및 문의</span></h2>
+        <div class="lab g"><span class="en">Work with MJ</span><span class="ko" lang="ko">협업 문의</span></div>
+        <h2 class="rv"><span class="en">Tell me about your brand</span><span class="ko" lang="ko">브랜드를 소개해 주세요</span></h2>
+        <p class="lede g"><span class="en">A few details and my team will get back to you by email.</span><span class="ko" lang="ko">몇 가지만 알려주시면 팀에서 이메일로 연락드릴게요.</span></p>
       </div>
+
+      <form class="inq rv" id="inq" data-endpoint="https://script.google.com/macros/s/AKfycby2lwVp839jRqF7XIyX0UkZ6d-iD-dG-g7XZnHb8prUQdDhCjCUXIUWhSxIkQzcm52-/exec" novalidate>
+        <div class="f2">
+          <label class="fld"><span class="lab g"><span class="en">Brand</span><span class="ko" lang="ko">브랜드명</span></span>
+            <input name="brand" required maxlength="120" autocomplete="organization"></label>
+          <label class="fld"><span class="lab g"><span class="en">Work email</span><span class="ko" lang="ko">회사 이메일</span></span>
+            <input name="email" type="email" required maxlength="200" autocomplete="email" autocapitalize="off" spellcheck="false"></label>
+        </div>
+
+        <fieldset class="fld">
+          <legend class="lab g"><span class="en">Platforms</span><span class="ko" lang="ko">플랫폼</span></legend>
+          <div class="chips">
+            <label class="chip"><input type="checkbox" name="platform" value="TikTok"><span>TikTok</span></label>
+            <label class="chip"><input type="checkbox" name="platform" value="Instagram"><span>Instagram</span></label>
+            <label class="chip"><input type="checkbox" name="platform" value="YouTube"><span>YouTube</span></label>
+          </div>
+        </fieldset>
+
+        <label class="fld"><span class="lab g"><span class="en">Timeline</span><span class="ko" lang="ko">희망 일정</span></span>
+          <input name="timeline" maxlength="120" placeholder="Late Nov · 11월 말"></label>
+
+        <label class="fld"><span class="lab g"><span class="en">About the collaboration</span><span class="ko" lang="ko">협업 내용</span></span>
+          <textarea name="message" rows="5" required maxlength="2000" data-lenis-prevent></textarea></label>
+
+        <label class="hp" aria-hidden="true">Company URL <input name="company_url" tabindex="-1" autocomplete="off"></label>
+
+        <div class="inq-foot">
+          <button type="submit" class="btn solid"><span class="en">Send inquiry</span><span class="ko" lang="ko">문의 보내기</span></button>
+          <p class="inq-err" role="alert"><span class="en">Please fill in the marked fields.</span><span class="ko" lang="ko">표시된 항목을 채워주세요.</span></p>
+        </div>
+
+        <div class="inq-done" role="status" tabindex="-1">
+          <p class="serif"><span class="en">Thank you.</span><span class="ko" lang="ko">감사합니다.</span></p>
+          <p><span class="en">We've got it. You'll get an email at <b data-sent-to></b> shortly.</span><span class="ko" lang="ko">문의가 접수되었어요. 곧 <b data-sent-to></b>로 메일 드릴게요.</span></p>
+        </div>
+      </form>
     </div>
+
     <div class="contact rv">
-      <span class="email" id="email">collab@likemjkim.com</span>
       <div class="contact-actions">
-        <button type="button" class="btn solid" id="copy"><span class="en">Copy email</span><span class="ko" lang="ko">이메일 복사</span></button>
-        <a class="btn" href="mailto:collab@likemjkim.com?subject=Collaboration%20with%20MJ"><span class="en">Write to MJ</span><span class="ko" lang="ko">메일 보내기</span></a>
+        <span class="mailalt g"><span class="en">Prefer email?</span><span class="ko" lang="ko">메일이 편하시면</span> <span id="email">collab@likemjkim.com</span></span>
+        <button type="button" class="btn" id="copy"><span class="en">Copy email</span><span class="ko" lang="ko">이메일 복사</span></button>
         <div class="socials">
           <a href="https://www.tiktok.com/@likemjkim" target="_blank" rel="noopener">TikTok</a>
           <a href="https://www.instagram.com/likemjkim/" target="_blank" rel="noopener">Instagram</a>
@@ -650,6 +722,37 @@ footer p { margin: 0; font-size: 12px; line-height: 1.6; color: var(--grey); max
     const select = () => { const r = document.createRange(); r.selectNodeContents(document.getElementById('email')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
     try { navigator.clipboard.writeText('collab@likemjkim.com').then(done, select); } catch (e) { select(); }
   });
+
+  /* inquiry form: posts to MJ's Apps Script; the brand confirms by email before it reaches her */
+  const inq = document.getElementById('inq');
+  if (inq) {
+    const t0 = Date.now();
+    inq.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      inq.classList.add('tried');
+      if (!inq.checkValidity()) { inq.classList.add('bad'); const f = inq.querySelector(':invalid'); if (f) f.focus({ preventScroll: false }); return; }
+      inq.classList.remove('bad');
+      const fd = new FormData(inq);
+      const body = new URLSearchParams();
+      ['brand', 'email', 'timeline', 'message', 'company_url'].forEach(k => body.set(k, (fd.get(k) || '').toString().trim()));
+      body.set('platforms', fd.getAll('platform').join(', '));
+      body.set('lang', root.dataset.lang === 'ko' ? 'ko' : 'en');
+      body.set('elapsed', String(Date.now() - t0));
+      const ep = inq.dataset.endpoint;
+      if (!ep) {
+        const lines = ['Brand: ' + body.get('brand'), 'Platforms: ' + body.get('platforms'), 'Timeline: ' + body.get('timeline'), '', body.get('message')];
+        location.href = 'mailto:collab@likemjkim.com?subject=' + encodeURIComponent('Collaboration: ' + body.get('brand')) + '&body=' + encodeURIComponent(lines.join('\n'));
+        return;
+      }
+      const btn = inq.querySelector('button[type=submit]');
+      btn.disabled = true;
+      // fire and show thanks right away; the script takes a few seconds to send the ticket email
+      fetch(ep, { method: 'POST', mode: 'no-cors', body, keepalive: true }).catch(() => {});
+      inq.querySelectorAll('[data-sent-to]').forEach(b => { b.textContent = body.get('email'); });
+      inq.classList.add('sent');
+      const done = inq.querySelector('.inq-done'); if (done) done.focus({ preventScroll: true });
+    });
+  }
 
   let saved = 'en';
   try { saved = localStorage.getItem('mjkit-lang') || 'en'; } catch (e) {}
