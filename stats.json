@@ -1,30 +1,30 @@
 {
- "as_of": "2026-11-03",
+ "as_of": "2026-11-04",
  "window": {
-  "start": "2026-08-06",
-  "end": "2026-11-03",
+  "start": "2026-08-07",
+  "end": "2026-11-04",
   "days": 90
  },
  "followers": {
   "tiktok": 17000,
   "youtube": 30700,
-  "instagram": 5433,
-  "total": 53133
+  "instagram": 5463,
+  "total": 53163
  },
  "tiktok": {
-  "n": 49,
-  "views": 2301457,
-  "median": 6028,
-  "er_median": 6.31,
+  "n": 51,
+  "views": 2332308,
+  "median": 4909,
+  "er_median": 6.44,
   "over_50k": 11,
   "paid_n": 8,
-  "paid_median": 6416.5,
-  "organic_n": 41,
-  "organic_median": 4678,
-  "lift_pct": 37.16331765711842,
-  "paid_save_rate": 1.749,
-  "organic_save_rate": 0.885,
-  "save_ratio": 1.976,
+  "paid_median": 6554.0,
+  "organic_n": 43,
+  "organic_median": 4745,
+  "lift_pct": 38.12434141201264,
+  "paid_save_rate": 1.741,
+  "organic_save_rate": 0.969,
+  "save_ratio": 1.795,
   "paid_ids": [
    "7687236497573055775",
    "7688911132819492126",
@@ -39,29 +39,35 @@
  "youtube": {
   "subs": 30700,
   "shorts_counted": 48,
-  "median": 5150.0
+  "median": 5450.0
  },
  "instagram": {
-  "followers": 5433,
+  "followers": 5463,
   "reels_counted": 24,
-  "median": 5435.5
+  "median": 5075.0
  },
- "typical": 16613.5,
+ "typical": 15434.0,
  "cards": {
   "tt:7697993481683258655:views": 243300,
-  "tt:7690425915339230495:saves": 1016,
-  "tt:7700989188619095326:views": 73700,
-  "ig:DdWrM6AJA7b:views": 1329502,
-  "tt:7699474972376435999:views": 488800,
-  "tt:7680553747189091614:saves": 7762,
+  "tt:7690425915339230495:saves": 1020,
+  "tt:7700989188619095326:views": 73800,
+  "ig:DdWrM6AJA7b:views": 1338102,
+  "tt:7699474972376435999:views": 509700,
+  "tt:7680553747189091614:saves": 7783,
   "tt:7680177353418427679:views": 251200,
-  "ig:DcT0TVyylpx:views": 241564,
-  "tt:7679222940566703374:views": 195600,
-  "tt:7680069002927901966:views": 62400,
-  "tt:7686068822884797727:views": 62900
+  "ig:DcT0TVyylpx:views": 242607,
+  "tt:7679222940566703374:views": 196400,
+  "tt:7680069002927901966:views": 62500,
+  "tt:7686068822884797727:views": 64600
  },
  "review": {
   "organic_with_mentions": [
+   {
+    "id": "7704364443303464205",
+    "mentions": [
+     "ugg"
+    ]
+   },
    {
     "id": "7687420789435419934",
     "mentions": [
@@ -89,9 +95,9 @@
   "followers_total.ko": "5.31만",
   "views90": "2.3M",
   "views90.ko": "230만",
-  "er": "6.3%",
-  "typical": "16.6K",
-  "typical.ko": "1.66만",
+  "er": "6.4%",
+  "typical": "15.4K",
+  "typical.ko": "1.54만",
   "over50k": "11",
   "yt_subs": "30.7K",
   "yt_subs.ko": "3.07만",
@@ -99,38 +105,38 @@
   "tt_followers.ko": "1.7만",
   "ig_followers": "5.4K",
   "ig_followers.ko": "5,400",
-  "asof": "Nov 3 2026",
-  "asof.ko": "2026년 11월 3일",
-  "win": "Aug 6 – Nov 3",
-  "win.ko": "8월 6일–11월 3일",
-  "tt_n": "49",
-  "brand_x": "1.9",
+  "asof": "Nov 4 2026",
+  "asof.ko": "2026년 11월 4일",
+  "win": "Aug 7 – Nov 4",
+  "win.ko": "8월 7일–11월 4일",
+  "tt_n": "51",
+  "brand_x": "1.7",
   "paid_sr": "1.7%",
-  "org_sr": "0.8%",
+  "org_sr": "0.9%",
   "brand_win": "same 90 days",
   "brand_win.ko": "같은 90일",
   "tt:7697993481683258655:views": "243K views",
   "tt:7697993481683258655:views.ko": "조회수 24.3만",
   "tt:7690425915339230495:saves": "1K saves",
   "tt:7690425915339230495:saves.ko": "저장 1,000회",
-  "tt:7700989188619095326:views": "73.7K views",
-  "tt:7700989188619095326:views.ko": "조회수 7.37만",
+  "tt:7700989188619095326:views": "73.8K views",
+  "tt:7700989188619095326:views.ko": "조회수 7.38만",
   "ig:DdWrM6AJA7b:views": "1.3M views",
   "ig:DdWrM6AJA7b:views.ko": "조회수 130만",
-  "tt:7699474972376435999:views": "488K views",
-  "tt:7699474972376435999:views.ko": "조회수 48.8만",
+  "tt:7699474972376435999:views": "509K views",
+  "tt:7699474972376435999:views.ko": "조회수 50.9만",
   "tt:7680553747189091614:saves": "7.7K saves",
   "tt:7680553747189091614:saves.ko": "저장 7,700회",
   "tt:7680177353418427679:views": "251K views",
   "tt:7680177353418427679:views.ko": "조회수 25.1만",
-  "ig:DcT0TVyylpx:views": "241K views",
-  "ig:DcT0TVyylpx:views.ko": "조회수 24.1만",
-  "tt:7679222940566703374:views": "195K views",
-  "tt:7679222940566703374:views.ko": "조회수 19.5만",
-  "tt:7680069002927901966:views": "62.4K views",
-  "tt:7680069002927901966:views.ko": "조회수 6.24만",
-  "tt:7686068822884797727:views": "62.9K views",
-  "tt:7686068822884797727:views.ko": "조회수 6.29만",
+  "ig:DcT0TVyylpx:views": "242K views",
+  "ig:DcT0TVyylpx:views.ko": "조회수 24.2만",
+  "tt:7679222940566703374:views": "196K views",
+  "tt:7679222940566703374:views.ko": "조회수 19.6만",
+  "tt:7680069002927901966:views": "62.5K views",
+  "tt:7680069002927901966:views.ko": "조회수 6.25만",
+  "tt:7686068822884797727:views": "64.6K views",
+  "tt:7686068822884797727:views.ko": "조회수 6.46만",
   "desc": "MJ Kim (@likemjkim) is a Korea-based K-beauty & lifestyle creator making English videos on TikTok, YouTube & Instagram. 2.3M TikTok views in 90 days.",
   "og_desc": "Korea-based K-beauty & lifestyle creator. English-language videos on TikTok, YouTube & Instagram. Media kit, Nov 2026."
  },
@@ -154,6 +160,6 @@
    "top_country": "India 46.2%"
   }
  },
- "fetched_at": "2026-11-03T09:15:01-08:00",
+ "fetched_at": "2026-11-04T09:15:01-08:00",
  "source": "public counts: TikTok profile page + yt-dlp listing; YouTube /shorts via yt-dlp; Instagram Graph API business_discovery (public data)"
 }
