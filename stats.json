@@ -176,9 +176,10 @@
   "note": "hand-entered from MJ's native analytics (not public); the daily job never changes these",
   "as_of": "2026-10",
   "instagram": {
-   "women_pct": 90,
+   "women_pct": 89,
    "age_18_34_pct": 61,
-   "top_country": "US 16.7%"
+   "top_country": "US 16.7%",
+   "women_pct_as_of": "2026-11-24"
   },
   "tiktok": {
    "age_18_34_pct": 77.2,
